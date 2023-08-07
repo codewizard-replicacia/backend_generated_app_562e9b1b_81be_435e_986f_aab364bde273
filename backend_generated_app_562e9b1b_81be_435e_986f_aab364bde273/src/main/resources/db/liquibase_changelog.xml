@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <property name="schemaName" value="generated_app"></property>
+    <property name="author=" value="db-designer"></property>
+    <changeSet id="v1-01-01" author="${author}">
+    
+ <createTable schemaName="${schemaName}" tableName="AbstractStudent">
+	<column name="StudentId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+     <column name="Name" type="VARCHAR(250)" />
+    
+     <column name="PhoneNo" type="INTEGER" />
+    
+     <column name="Email" type="VARCHAR(250)" />
+    
+   	<column name="AdhaarNo_PersonId" type="INTEGER"/>
+	<column name="AdhaarNo_AadharNo" type="INTEGER"/>
+      <column name="Name" type="VARCHAR(250)" />
+    
+ 	
+	<column name="DType" type="VARCHAR(31)"/>
+</createTable>
+ <createTable schemaName="${schemaName}" tableName="Course">
+    <column name="CourseName" type="VARCHAR(250)" />
+    
+ 	<column name="CourseId" type="SERIAL" autoIncrement="true" >
+        <constraints nullable="false" primaryKey="true"/>
+    </column>
+ 	
+</createTable>
+	
+  <createTable schemaName="${schemaName}" tableName="StudentEnrolled">
+	<column name="Id" type="SERIAL" autoIncrement="true">
+		<constraints primaryKey="true" nullable="false"/>
+	</column>
+	<column name="StudentId" type="INTEGER" />
+	<column name="CourseId" type="INTEGER" />
+</createTable>
+
+ 
+	<addForeignKeyConstraint baseTableName="StudentEnrolled" baseTableSchemaName="${schemaName}"  baseColumnNames="StudentId" constraintName="Course_StudentId_fk"
+	                                  referencedTableName="Student" referencedTableSchemaName="${schemaName}" referencedColumnNames="StudentId"/>
+	                                  
+	<addForeignKeyConstraint baseTableName="StudentEnrolled" baseTableSchemaName="${schemaName}"  baseColumnNames="CourseId" constraintName="Course_CourseId_fk"
+	                                  referencedTableName="Course" referencedTableSchemaName="${schemaName}" referencedColumnNames="CourseId"/>
+ 
+	
+ 
+ 
+	    </changeSet>
+</databaseChangeLog>
